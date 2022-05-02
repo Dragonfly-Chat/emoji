@@ -38,7 +38,7 @@ $_emoji={
     return this.p+e.split(':')[1];
   },
   c:function(e=""){
-    return '<img src="'+this.u(e)+'" width="'+this.s+'" height="'+this.s+'"/>';
+    return '<img src="'+this.u(e)+'" width="'+this.s+'" height="'+this.s+'" alt="'+e+'"/>';
   },
   text:function(t=""){
     var el=t.match(/:(.*?):/g);
