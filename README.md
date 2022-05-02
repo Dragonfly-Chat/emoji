@@ -7,6 +7,9 @@ python build.py
 ```
 This will create a `build` folder, which will contain all emojis.
 
+To load the emoji script into the website, add the `build/dragonfly-emoji-version.js` to the website.
+Then call `$_emoji.text` with the text to replace with the emojis.
+
 ## Configuration
 The `emoji-build.json` file contains all of the building configuration.
 
