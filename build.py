@@ -28,7 +28,7 @@ else:
 print("Done.")
 
 print("Building JavaScript library...")
-js = """\
+js = """
 /* Dragonfly emoji set v%ver%. Licensed under MIT. All credit goes to contributors. */ 
 $_emoji={
   p:'%path%',
