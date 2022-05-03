@@ -17,4 +17,5 @@ reformatted string containing the emojis, now formatted as images.
 The `emoji-build.json` file contains all of the building configuration.
 
 > `path` (`path`) - The path used for fetching emojis from the server.
+>
 > `size` (`32px`) - The size of each emoji, in pixels.
