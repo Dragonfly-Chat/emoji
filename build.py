@@ -63,9 +63,9 @@ js_file.close()
 print("Done.")
 
 print("Building emojis...")
-for category in os.listdir("assets/other"):
-  for file in os.listdir(f"assets/other/{category}"):
-    infile = open(f"assets/other/{category}/{file}", 'rb')
+for category in os.listdir("assets/community"):
+  for file in os.listdir(f"assets/community/{category}"):
+    infile = open(f"assets/community/{category}/{file}", 'rb')
     outfile = open(f"build/emoji/{category}_{file.split('.')[0]}", 'wb')
     outfile.write(infile.read())
     infile.close()
