@@ -61,7 +61,7 @@ $_emoji={
     }
   },
   text:function(t=""){
-    var el=t.match(/:(.*?):/g);
+    var el=t.match(/:(\S.\S*?):/g);
     var rl=[];
     el.forEach((e)=>{
       t=t.replace(e,this.c(e));
