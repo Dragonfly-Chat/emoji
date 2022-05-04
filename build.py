@@ -1,5 +1,5 @@
 # https://github.com/Dragonfly-Chat/emoji
-VERSION = "0.0.1"
+VERSION = "0.0.2"
 import os, json
 
 config = {
@@ -52,10 +52,13 @@ $_emoji={
   u:function(e=""){
     return this.p+e;
   },
+  const:function(e="",size=""){
+    return '<img src="'+this.u(e)+'" width="'+size+'" height="'+size+'" alt="'+e+'" class="emoji"/>';
+  },
   c:function(e=""){
     em=e.split(':')[1];
     if(this.list.includes(em)){
-      return '<img src="'+this.u(em)+'" width="'+this.s+'" height="'+this.s+'" alt="'+em+'" class="emoji"/>';
+      return this.const(em,this.s);
     }else{
       return e;
     }
@@ -68,7 +71,22 @@ $_emoji={
     });
     return t;
   },
-  list:JSON.parse('%list%')
+  list:JSON.parse('%list%'),
+  element:function(el){
+    el.innerHTML=this.text(el.innerHTML);
+  },
+  element_query:function(qs=""){
+    this.element(document.querySelector(qs));
+  },
+  element_query_all:function(qs=""){
+    var queries=document.querySelectorAll(qs);
+    for(var i=0;i<queries.length;i++){
+      this.element(queries[i]);
+    }
+  },
+  element_id:function(id=""){
+    this.element_query('#'+id);
+  }
 }
 """
 
