@@ -1,4 +1,5 @@
 {
   "path": "/emoji/",
-  "size": "32px"
+  "size": "32px",
+  "js_title_includes_version": true
 }

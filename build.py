@@ -4,7 +4,8 @@ import os, json
 
 config = {
   "path": "/emoji/",
-  "size": "32px"
+  "size": "32px",
+  "js_title_includes_version": True
 }
 
 if os.path.exists("emoji-build.json") and os.path.isfile("emoji-build.json"):
@@ -91,7 +92,11 @@ $_emoji={
 """
 
 # Minify, build, & save JavaScript file
-js_file = open(f"build/dragonfly-emoji-{VERSION}.min.js", 'w')
+if config['js_title_includes_version']:
+  js_filename = f"build/dragonfly-emoji-{VERSION}.min.js"
+else:
+  js_filename = "build/dragonfly-emoji.min.js"
+js_file = open(js_filename, 'w')
 js_file.write(js.replace('\n','').replace('  ','').replace('%path%', config['path']).replace('%size%', config['size']).replace('%ver%', VERSION).replace('%list%', json.dumps(emojilist)))
 js_file.close()
 print("Done.")

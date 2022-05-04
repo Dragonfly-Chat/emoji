@@ -58,4 +58,5 @@ The `emoji-build.json` file contains all of the building configuration.
 > `path` (`path`) - The path used for fetching emojis from the server.
 >
 > `size` (`32px`) - The size of each emoji, in pixels.
-https://pool.jortage.com/voringme/misskey/175041de-7708-4d25-8843-43f5998e55bb
+>
+> `js_title_includes_version` (`true`) - Add the ability to disable the version in the JS filename. This can be useful in production deployments.
