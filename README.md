@@ -1,5 +1,7 @@
 # emoji
-Emoji set for Dragonfly
+A (will-be) complete emoji set designed for the 
+Dragonfly chat service, available for anyone to
+use.
 
 To quickly get started, run:
 ```bash
