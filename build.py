@@ -1,6 +1,9 @@
 # https://github.com/Dragonfly-Chat/emoji
 VERSION = "0.0.3"
 import os, json
+from datetime import datetime
+
+out = f"Started build on {datetime.now().strftime('%m/%d/%Y, %H:%M:%S')}"
 
 config = {
   "path": "/emoji/",
@@ -26,6 +29,7 @@ else:
   print("Creating build directories...")
   os.mkdir("build")
   os.mkdir("build/emoji")
+out += "Build directory created sucessfully.\n"
 print("Done.")
 
 # print("Building unicode emojis...")
@@ -106,10 +110,14 @@ for id in emojilist:
   alttext = id
   if id in alt_text.keys():
     alttext = alt_text[id]
+  else:
+    out += f"There is no image description for the emoji '{id}'.\n"
   e = {
     "alt": alttext,
     "html": f"<img src=\"{config['path']+id}\" width=\"{config['size']}\" height=\"{config['size']}\" alt=\"{alttext}\" class=\"emoji\"/>"
   }
+  if id in emoji_build.keys():
+    out += f"The emoji {id} is being overwritten by another emoji with the same filename.\n"
   emoji_build[id] = e
 
 # Minify, build, & save JavaScript file
@@ -121,3 +129,9 @@ js_file = open(js_filename, 'w')
 js_file.write(js.replace('\n','').replace('  ','').replace('%path%', config['path']).replace('%size%', config['size']).replace('%ver%', VERSION).replace('%list%', json.dumps(emoji_build)))
 js_file.close()
 print("Done.")
+
+outfile = open('build/build.log', 'w')
+outfile.write(out)
+outfile.close()
+print("Build completed. Check build/build.log for more details.")
+
