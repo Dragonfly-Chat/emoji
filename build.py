@@ -1,5 +1,5 @@
 # https://github.com/Dragonfly-Chat/emoji
-VERSION = "0.0.2"
+VERSION = "0.0.3"
 import os, json
 
 config = {
@@ -28,7 +28,11 @@ else:
   os.mkdir("build/emoji")
 print("Done.")
 
-print("Building emojis...")
+# print("Building unicode emojis...")
+# Unicode emoji parsing goes here
+
+
+print("Building community emojis...")
 emojilist = []
 for category in os.listdir("assets/community"):
   for file in os.listdir(f"assets/community/{category}"):
@@ -41,7 +45,9 @@ for category in os.listdir("assets/community"):
     outfile.close()
 print("Done.")
 
-
+alt_text_f = open('assets/alt.json')
+alt_text = json.loads(alt_text_f.read())
+alt_text_f.close()
 
 print("Building JavaScript library...")
 js = """
@@ -50,16 +56,16 @@ $_emoji={
   p:'%path%',
   s:'%size%',
   v:'%ver%',
-  u:function(e=""){
-    return this.p+e;
-  },
-  const:function(e="",size=""){
-    return '<img src="'+this.u(e)+'" width="'+size+'" height="'+size+'" alt="'+e+'" class="emoji"/>';
+  init:function(){
+    if(!this.haslist){
+      this.list=Object.keys(this.dict);
+    }
   },
   c:function(e=""){
+    this.init();
     em=e.split(':')[1];
     if(this.list.includes(em)){
-      return this.const(em,this.s);
+      return this.dict[em].html;
     }else{
       return e;
     }
@@ -72,7 +78,8 @@ $_emoji={
     });
     return t;
   },
-  list:JSON.parse('%list%'),
+  dict:%list%,
+  haslist:false,
   element:function(el){
     el.innerHTML=this.text(el.innerHTML);
   },
@@ -91,12 +98,26 @@ $_emoji={
 }
 """
 
+def urlify(e):
+  return 
+
+emoji_build = {}
+for id in emojilist:
+  alttext = id
+  if id in alt_text.keys():
+    alttext = alt_text[id]
+  e = {
+    "alt": alttext,
+    "html": f"<img src=\"{config['path']+id}\" width=\"{config['size']}\" height=\"{config['size']}\" alt=\"{alttext}\" class=\"emoji\"/>"
+  }
+  emoji_build[id] = e
+
 # Minify, build, & save JavaScript file
 if config['js_title_includes_version']:
   js_filename = f"build/dragonfly-emoji-{VERSION}.min.js"
 else:
   js_filename = "build/dragonfly-emoji.min.js"
 js_file = open(js_filename, 'w')
-js_file.write(js.replace('\n','').replace('  ','').replace('%path%', config['path']).replace('%size%', config['size']).replace('%ver%', VERSION).replace('%list%', json.dumps(emojilist)))
+js_file.write(js.replace('\n','').replace('  ','').replace('%path%', config['path']).replace('%size%', config['size']).replace('%ver%', VERSION).replace('%list%', json.dumps(emoji_build)))
 js_file.close()
 print("Done.")
