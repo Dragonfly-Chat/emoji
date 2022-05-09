@@ -1,5 +1,5 @@
 # https://github.com/Dragonfly-Chat/emoji
-VERSION = "0.0.3"
+VERSION = "0.0.3.1"
 import os, json
 from datetime import datetime
 
@@ -82,8 +82,9 @@ $_emoji={
     });
     return t;
   },
-  dict:%list%,
+  dict:%dict%,
   haslist:false,
+  list:%list%,
   element:function(el){
     el.innerHTML=this.text(el.innerHTML);
   },
@@ -126,7 +127,7 @@ if config['js_title_includes_version']:
 else:
   js_filename = "build/dragonfly-emoji.min.js"
 js_file = open(js_filename, 'w')
-js_file.write(js.replace('\n','').replace('  ','').replace('%path%', config['path']).replace('%size%', config['size']).replace('%ver%', VERSION).replace('%list%', json.dumps(emoji_build)))
+js_file.write(js.replace('\n','').replace('  ','').replace('%path%', config['path']).replace('%size%', config['size']).replace('%ver%', VERSION).replace('%dict%', json.dumps(emoji_build)).replace('%list%', json.dumps(emoji_build.keys())))
 js_file.close()
 print("Done.")
 
