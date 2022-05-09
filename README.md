@@ -17,7 +17,7 @@ quick example.
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="path/to/build/dragonfly-emoji-0.0.2.min.js"></script>
+    <script src="path/to/build/dragonfly-emoji.min.js"></script>
     <script>
       window.onload = function() {
         $_emoji.element_id('header');
