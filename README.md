@@ -1,4 +1,6 @@
 # emoji
+<img alt="Issues" src="https://img.shields.io/github/issues/Dragonfly-Chat/emoji?style=for-the-badge"> <img alt="Pull requests" src="https://img.shields.io/github/issues-pr/Dragonfly-Chat/emoji?style=for-the-badge">
+
 A (will-be) complete emoji set designed for the 
 Dragonfly chat service, available for anyone to
 use.
