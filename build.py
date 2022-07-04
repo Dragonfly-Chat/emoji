@@ -108,7 +108,7 @@ for id in emojilist:
     out += f"There is no image description for the emoji '{id}'.\n"
   e = {
     "alt": alttext,
-    "html": f"<img src=\"{config['path']+id}\" width=\"{config['size']}\" height=\"{config['size']}\" alt=\"{alttext}\" class=\"emoji\"/>"
+    "html": f"<img src=\"{config['path']+id}\"width=\"{config['size']}\"height=\"{config['size']}\"alt=\"{alttext}\"class=\"emoji\"/>"
   }
   if id in emoji_build.keys():
     out += f"The emoji {id} is being overwritten by another emoji with the same filename.\n"
